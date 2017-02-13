@@ -31,7 +31,7 @@
 struct utsname {
   const char *sysname;
   const char *machine;
-} utsname_windows = { "Windows NT", "x86_64" };
+} utsname_windows = { "Windows_NT", "x86_64" };
 int uname(struct utsname*);
 #endif /* UTSNAME_H */
 
@@ -76,7 +76,7 @@ mrb_os_bits(mrb_state *mrb, mrb_value self)
     str = mrb_string_value_cstr(mrb, &arg);
   }
 
-  if (strcmp(str, "os") == 0) {
+  if (strcmp(str, "machine") == 0) {
   #if defined(__x86_64__) || defined(_WIN64)
     return mrb_fixnum_value(64);
   #elif defined(__i386) || defined(_WIN32)
@@ -145,7 +145,7 @@ mrb_os_linux(mrb_state *mrb, mrb_value self)
 static mrb_value
 mrb_os_windows(mrb_state *mrb, mrb_value self)
 {
-  return mrb_bool_value(strcmp(mrb_os_uname(mrb).sysname, "Windows NT") == 0);
+  return mrb_bool_value(strcmp(mrb_os_uname(mrb).sysname, "Windows_NT") == 0);
 }
 
 /**
@@ -156,7 +156,7 @@ mrb_os_windows(mrb_state *mrb, mrb_value self)
 static mrb_value
 mrb_os_posix(mrb_state *mrb, mrb_value self)
 {
-  return mrb_bool_value(strcmp(mrb_os_uname(mrb).sysname, "Windows NT") != 0);
+  return mrb_bool_value(strcmp(mrb_os_uname(mrb).sysname, "Windows_NT") != 0);
 }
 
 /**
