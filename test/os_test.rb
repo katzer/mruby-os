@@ -20,4 +20,38 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-# TODO: tests
+assert 'sysname' do
+  assert_false OS.sysname.nil?
+end
+
+assert 'machine' do
+  assert_false OS.machine.nil?
+end
+
+assert 'posix?' do
+  assert_true OS.posix?
+end
+
+assert 'windows?' do
+  assert_false OS.windows?
+end
+
+assert '*nix?' do
+  assert_true OS.linux? || OS.osx?
+end
+
+assert 'bits' do
+  assert_include [32, 64], OS.bits
+end
+
+assert 'bits(machine)' do
+  assert_include [32, 64], OS.bits(:machine)
+end
+
+assert 'bits(binary)' do
+  assert_include [32, 64], OS.bits(:binary)
+end
+
+assert 'bits(unknown)' do
+  assert_nil OS.bits('unknown')
+end
