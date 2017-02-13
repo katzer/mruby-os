@@ -25,17 +25,16 @@
 #include "mruby/string.h"
 #include <string.h>
 
-#ifdef _WIN32
-struct utsname
-{
+#ifndef _WIN32
+#include <sys/utsname.h>
+#else
+struct utsname {
   const char *sysname;
   const char *machine;
 } utsname_windows = { "Windows NT", "x86_64" };
-
 int uname(struct utsname*);
-#else
-#include <sys/utsname.h>
 #endif /* UTSNAME_H */
+
 
 /**
  * Struct with details about the sysname and machine.
@@ -45,8 +44,11 @@ mrb_os_uname(mrb_state *mrb)
 {
   struct utsname buffer;
 
-#if defined(_WIN32) || defined(_WIN64)
+#if defined(_WIN64)
   buffer = utsname_windows;
+#elif defined(_WIN32)
+  buffer = utsname_windows;
+  buffer.machine = "i686";
 #else
   if (uname(&buffer) != 0) {
     mrb_raise(mrb, E_RUNTIME_ERROR, "uname failed");
@@ -58,8 +60,8 @@ mrb_os_uname(mrb_state *mrb)
 /**
  * Returns the pointer size used by OS or the binary.
  *
- *  OS.bits or OS.bits(:os)  -> Fixnum
- *             OS.bits(:bin) -> Fixnum
+ *  OS.bits or OS.bits(:machine) -> Fixnum
+ *             OS.bits(:binary)  -> Fixnum
  */
 static mrb_value
 mrb_os_bits(mrb_state *mrb, mrb_value self)
@@ -157,6 +159,9 @@ mrb_os_posix(mrb_state *mrb, mrb_value self)
   return mrb_bool_value(strcmp(mrb_os_uname(mrb).sysname, "Windows NT") != 0);
 }
 
+/**
+ * Called within the build process to add extensions.
+ */
 void
 mrb_mruby_os_gem_init(mrb_state* mrb)
 {
@@ -175,6 +180,9 @@ mrb_mruby_os_gem_init(mrb_state* mrb)
   mrb_define_class_method(mrb, os, "posix?", mrb_os_posix, MRB_ARGS_NONE());
 }
 
+/**
+ * Called within the build process to cleanup.
+ */
 void
 mrb_mruby_os_gem_final(mrb_state* mrb)
 {
