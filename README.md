@@ -31,7 +31,7 @@ OS.bits :binary
 
 To get the kernel name:
 ```ruby
-OS.sysname # Darwin, Linux or WindowsNT
+OS.sysname # Darwin, Linux or Windows_NT
 ```
 
 To execute code per platform:
