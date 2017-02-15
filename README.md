@@ -7,7 +7,7 @@ Determine system and binary capabilities at runtime.
 Add the line below to your `build_config.rb`:
 
 ```ruby
-conf.gem github: 'appplant/mruby-os'
+conf.gem 'mruby-os'
 ```
 
 ## Usage
