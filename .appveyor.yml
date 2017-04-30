@@ -36,7 +36,6 @@ init:
 - SET PATH=%COMPILER%\bin;%PATH%
 - SET PATH=C:\Ruby23-x64\bin;%PATH%
 - SET PATH=C:\cygwin\bin;%PATH%
-- SET MRUBY_CONFIG=%APPVEYOR_BUILD_FOLDER%\build_config.rb
 - gcc --version
 
 build_script:
