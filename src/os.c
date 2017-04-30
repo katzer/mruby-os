@@ -138,17 +138,6 @@ mrb_os_linux(mrb_state *mrb, mrb_value self)
 }
 
 /**
- * Returns true if binary is running on Windows.
- *
- *  OS.windows? -> BOOL
- */
-static mrb_value
-mrb_os_windows(mrb_state *mrb, mrb_value self)
-{
-  return mrb_bool_value(strcmp(mrb_os_uname(mrb).sysname, "Windows_NT") == 0);
-}
-
-/**
  * Returns true if binary is running on a POSIX-like system.
  *
  *  OS.windows? -> BOOL
@@ -156,7 +145,27 @@ mrb_os_windows(mrb_state *mrb, mrb_value self)
 static mrb_value
 mrb_os_posix(mrb_state *mrb, mrb_value self)
 {
-  return mrb_bool_value(strcmp(mrb_os_uname(mrb).sysname, "Windows_NT") != 0);
+  if (mrb_bool(mrb_os_mac(mrb, self)))
+    return mrb_true_value();
+
+  if (mrb_bool(mrb_os_linux(mrb, self)))
+    return mrb_true_value();
+
+  return mrb_false_value();
+}
+
+/**
+ * Returns true if binary is running on Windows.
+ *
+ *  OS.windows? -> BOOL
+ */
+static mrb_value
+mrb_os_windows(mrb_state *mrb, mrb_value self)
+{
+  if (mrb_bool(mrb_os_posix(mrb, self)))
+    return mrb_false_value();
+  else
+    return mrb_true_value();
 }
 
 /**
