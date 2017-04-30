@@ -20,9 +20,11 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-MRuby::Gem::Specification.new('mruby-os') do |spec|
-  spec.license = 'MIT'
-  spec.authors = 'Sebastian Katzer, appPlant GmbH'
+MRuby::Build.new do |conf|
+  toolchain :gcc
 
-  spec.add_test_dependency 'mruby-env'
+  conf.enable_debug
+  conf.enable_test
+
+  conf.gem File.expand_path(File.dirname(__FILE__))
 end

@@ -20,9 +20,44 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-MRuby::Gem::Specification.new('mruby-os') do |spec|
-  spec.license = 'MIT'
-  spec.authors = 'Sebastian Katzer, appPlant GmbH'
+MRUBY_CONFIG  = File.expand_path(ENV['MRUBY_CONFIG'] || 'build_config.rb')
+MRUBY_VERSION = ENV['MRUBY_VERSION'] || 'head'
 
-  spec.add_test_dependency 'mruby-env'
+def mtask(cmd)
+  if Gem.win_platform?
+    Dir.chdir('mruby') do
+      sh "set MRUBY_CONFIG=#{MRUBY_CONFIG} && ruby .\\minirake #{cmd}"
+    end
+  else
+    sh "cd mruby && MRUBY_CONFIG=#{MRUBY_CONFIG} ruby ./minirake #{cmd}"
+  end
+end
+
+file :mruby do
+  if MRUBY_VERSION == 'head'
+    sh 'git clone --depth 1 git://github.com/mruby/mruby.git'
+  else
+    sh "curl -L --fail --retry 3 --retry-delay 1 https://github.com/mruby/mruby/archive/#{MRUBY_VERSION}.tar.gz -s -o - | tar zxf -"
+    mv "mruby-#{MRUBY_VERSION}", 'mruby'
+  end
+end
+
+desc 'compile binary'
+task compile: :mruby do
+  mtask 'all'
+end
+
+desc 'test'
+task test: :mruby do
+  mtask 'test'
+end
+
+desc 'cleanup'
+task :clean do
+  mtask 'clean'
+end
+
+desc 'deep cleanup'
+task :cleanall do
+  mtask 'deep_clean'
 end
