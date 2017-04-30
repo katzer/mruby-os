@@ -1,4 +1,4 @@
-# mruby-os [![Build Status](https://travis-ci.org/appPlant/mruby-os.svg?branch=master)](https://travis-ci.org/appPlant/mruby-os)
+# mruby-os [![Build Status](https://travis-ci.org/appPlant/mruby-os.svg?branch=master)](https://travis-ci.org/appPlant/mruby-os) [![Build status](https://ci.appveyor.com/api/projects/status/9o4do8f94gh0kagg?svg=true)](https://ci.appveyor.com/project/katzer/mruby-os)
 
 Determine system and binary capabilities at runtime.
 
