@@ -28,16 +28,16 @@ assert 'machine' do
   assert_false OS.machine.nil?
 end
 
-assert 'posix?' do
-  assert_true OS.posix?
-end
-
 assert 'windows?' do
-  assert_false OS.windows?
+  assert_equal ENV['OS'] == 'Windows_NT', OS.windows?
 end
 
 assert '*nix?' do
-  assert_true OS.linux? || OS.osx?
+  assert_equal ENV['OS'] != 'Windows_NT', OS.linux? || OS.osx?
+end
+
+assert 'posix?' do
+  assert_equal OS.linux? || OS.osx?, OS.posix?
 end
 
 assert 'bits' do
