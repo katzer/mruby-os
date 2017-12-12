@@ -7,7 +7,19 @@ Determine system and binary capabilities at runtime.
 Add the line below to your `build_config.rb`:
 
 ```ruby
-conf.gem 'mruby-os'
+MRuby::Build.new do |conf|
+  # ... (snip) ...
+  conf.gem 'mruby-os'
+end
+```
+
+Or add this line to your aplication's `mrbgem.rake`:
+
+```ruby
+MRuby::Gem::Specification.new('your-mrbgem') do |spec|
+  # ... (snip) ...
+  spec.add_dependency 'mruby-logger'
+end
 ```
 
 ## Usage
@@ -45,10 +57,23 @@ end
 
 See also `linux?`, `mac?`, `macos?`, `osx?`, `x?`.
 
+## Development
+
+Clone the repo:
+    
+    $ git clone https://github.com/katzer/mruby-os.git && cd mruby-os/
+
+Compile the source:
+
+    $ rake compile
+
+Run the tests:
+
+    $ rake test
+
 ## Authors
 
 - Sebastián Katzer, Fa. appPlant GmbH
-
 
 ## License
 
