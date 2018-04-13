@@ -24,6 +24,6 @@ MRuby::Gem::Specification.new('mruby-os') do |spec|
   spec.license = 'MIT'
   spec.authors = 'Sebastian Katzer, appPlant GmbH'
 
-  spec.add_test_dependency 'mruby-print'
-  spec.add_test_dependency 'mruby-env'
+  spec.add_test_dependency 'mruby-print', core: 'mruby-print'
+  spec.add_test_dependency 'mruby-env',   mgem: 'mruby-env'
 end
