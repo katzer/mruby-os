@@ -1,6 +1,6 @@
 # MIT License
 #
-# Copyright (c) 2017 Sebastian Katzer
+# Copyright (c) Sebastian Katzer 2017
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to deal
@@ -23,10 +23,8 @@
 MRuby::Build.new do |conf|
   toolchain ENV.fetch('TOOLCHAIN', :gcc)
 
-  if ARGV.include? 'test'
-    conf.enable_debug
-    conf.enable_test
-  end
+  conf.enable_debug
+  conf.enable_test
 
   conf.gem __dir__
 end

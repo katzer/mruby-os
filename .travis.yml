@@ -1,6 +1,6 @@
 # MIT License
 #
-# Copyright (c) 2017 Sebastian Katzer
+# Copyright (c) Sebastian Katzer 2017
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to deal
@@ -27,7 +27,7 @@ compiler:
 - clang
 
 env:
-- MRUBY_VERSION=1.4.0
+- MRUBY_VERSION=stable
 - MRUBY_VERSION=head
 
 matrix:
