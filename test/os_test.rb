@@ -1,6 +1,6 @@
 # MIT License
 #
-# Copyright (c) 2017 Sebastian Katzer
+# Copyright (c) Sebastian Katzer 2017
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to deal
@@ -49,7 +49,7 @@ assert 'bits(machine)' do
 end
 
 assert 'bits(binary)' do
-  assert_include [32, 64], OS.bits(:binary)
+  assert_include [32, 64], OS.bits('binary')
 end
 
 assert 'bits(unknown)' do
