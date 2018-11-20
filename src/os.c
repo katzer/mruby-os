@@ -67,12 +67,10 @@ static mrb_value
 mrb_os_bits(mrb_state *mrb, mrb_value self)
 {
   mrb_value arg;
-  int argc;
   const char* str = "machine";
 
-  argc = mrb_get_args(mrb, "|o", &arg);
-
-  if (argc != 0) {
+  if (mrb_get_args(mrb, "|o", &arg) > 0) {
+    arg = mrb_str_to_str(mrb, arg);
     str = mrb_string_value_cstr(mrb, &arg);
   }
 
