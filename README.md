@@ -1,4 +1,4 @@
-# mruby-os [![Build Status](https://travis-ci.org/appPlant/mruby-os.svg?branch=master)](https://travis-ci.org/appPlant/mruby-os) [![Build status](https://ci.appveyor.com/api/projects/status/9o4do8f94gh0kagg?svg=true)](https://ci.appveyor.com/project/katzer/mruby-os)
+# mruby-os [![Build Status](https://travis-ci.com/appPlant/mruby-os.svg?branch=master)](https://travis-ci.com/appPlant/mruby-os) [![Build status](https://ci.appveyor.com/api/projects/status/9o4do8f94gh0kagg?svg=true)](https://ci.appveyor.com/project/katzer/mruby-os)
 
 Determine system and binary capabilities at runtime.
 
@@ -79,7 +79,7 @@ Run the tests:
 
 The gem is available as open source under the terms of the [MIT License][license].
 
-Made with :yum: from Leipzig
+Made with :yum: in Leipzig
 
 © 2017 [appPlant GmbH][appplant]
 
