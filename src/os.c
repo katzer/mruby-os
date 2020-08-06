@@ -75,9 +75,9 @@ mrb_os_bits(mrb_state *mrb, mrb_value self)
   }
 
   if (strcmp(str, "machine") == 0) {
-  #if defined(__x86_64__) || defined(_WIN64)
+  #if defined(__x86_64__) || defined(__aarch64__) || defined(_WIN64)
     return mrb_fixnum_value(64);
-  #elif defined(__i386) || defined(_WIN32)
+  #elif defined(__i386) || defined(__arm__) || defined(_WIN32)
     return mrb_fixnum_value(32);
   #endif
   }
